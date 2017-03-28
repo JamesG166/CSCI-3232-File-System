@@ -6,19 +6,25 @@
 
 using namespace std;
 
-Directory::Directory(string n) : Entity (n, true) {
-	hasParent = false;
+Directory::Directory(string n) : Entity (n, true), hasParent(false) {}
+
+void Directory::addChild(Entity* e) {
+	children[e->getName()] = e;
+	e->setParent(this);
 }
 
-void Directory::addChild(Entity e) {
-	children[e.getName()] = e;
-}
-
-void Directory::setParent(Directory* d) {
+void Directory::setParent(Entity* e) {
 	hasParent = true;
-	parent = d;
+	parent = (Directory*) e;
+}
+void Directory::flushDirectory() {
+	children.clear();
 }
 
-string Directory::getParent() {
-	return parent->getName();
+bool Directory::contains(string file) {
+	return children.count(file) != 0;
+}
+
+Directory* Directory::getParent() {
+	return parent;
 }

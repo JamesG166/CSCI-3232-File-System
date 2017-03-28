@@ -8,10 +8,19 @@
 class FileSystem {
 protected:
 	Directory* currentDirectory;
+	Directory* root;
 public:
+	bool isFormatted;
 	FileSystem(Directory* d);
+	void makeFileSystem();
 	void list();
+	Directory* getCurrentDirectory();
 	void changeDirectory(string dir);
+	void makeDirectory(string dir);
+	void removeDirectory(string dir);
+	void makeFile(string filename);
+	void removeFile(string filename);
+	void stat(string filename);
 	string getWorkingDirectory();
 };
 
